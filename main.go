@@ -5,6 +5,7 @@ import (
 	"net/url"
 	"os"
 	"strconv"
+	"webcrawler/report"
 	"webcrawler/web"
 )
 
@@ -60,9 +61,8 @@ func mainCode() int {
 	go webcrawler.CrawlPage(crawlURL)
 	webcrawler.Wg.Wait()
 
-	for page, pageCount := range webcrawler.Pages {
-		fmt.Printf("%v : %v\n", page, pageCount)
-	}
+	report.PrintReport(webcrawler.Pages, crawlURL)
+
 	return 0
 }
 
